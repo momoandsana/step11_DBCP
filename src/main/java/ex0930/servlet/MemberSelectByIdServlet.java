@@ -22,11 +22,13 @@ public class MemberSelectByIdServlet extends HttpServlet {
 
         if(memberDTO!=null)
         {
+            // 포워드
             req.setAttribute("member", memberDTO);
             req.getRequestDispatcher("/read.jsp").forward(req, resp);
         }
         else
         {
+            // 포워드
             req.setAttribute("member", "해당 아이디와 매치되는 아이디가 없습니다");
             req.getRequestDispatcher("/error.jsp").forward(req, resp);
         }

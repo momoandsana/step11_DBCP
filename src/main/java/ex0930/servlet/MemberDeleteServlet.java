@@ -33,6 +33,7 @@ public class MemberDeleteServlet extends HttpServlet
         }
         else
         {
+            // 포워드
             req.setAttribute("errMsg","아이디를 삭제할 수 없습니다");
             req.getRequestDispatcher("/error.jsp").forward(req, resp);
         }

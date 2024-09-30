@@ -38,19 +38,23 @@ public class MemberInsertServlet extends HttpServlet {
         }
         else
         {
-            req.getSession().setAttribute("errMsg", "이미 중복된 아이디를 가진 회원이 있습니다");
-            resp.sendRedirect(req.getContextPath()+"/error.jsp");
+           req.getSession().setAttribute("errMsg", "이미 중복된 아이디를 가진 회원이 있습니다");
+//            resp.sendRedirect(req.getContextPath()+"/error.jsp");
+            req.getRequestDispatcher("/error.jsp").forward(req, resp);
             return;
         }
 
         if(result>0)
         {
-            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+
+//            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            resp.sendRedirect("/index.jsp");
         }
         else
         {
             req.getSession().setAttribute("errMsg", "회원가입 중 오류가 발생함");
-            resp.sendRedirect(req.getContextPath()+"/error.jsp");
+            req.getRequestDispatcher("/error.jsp").forward(req, resp);
+//            resp.sendRedirect(req.getContextPath()+"/error.jsp");
         }
 
     }

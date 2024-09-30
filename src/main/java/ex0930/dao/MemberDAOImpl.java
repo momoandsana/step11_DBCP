@@ -174,7 +174,7 @@ public class MemberDAOImpl implements MemberDAO {
         try {
             con = DBManager.getConnection();
             pstmt = con.prepareStatement(query);
-            pstmt.setString(1, "%" + keyWord + "%");  // 부분 일치 검색
+            pstmt.setString(1, "%" + keyWord + "%");  // 앞, 뒤로 부분 일치 검색
 
             rs = pstmt.executeQuery();
 
