@@ -29,7 +29,7 @@ public class MemberSelectByIdServlet extends HttpServlet {
         else
         {
             // 포워드
-            req.setAttribute("member", "해당 아이디와 매치되는 아이디가 없습니다");
+            req.setAttribute("errMsg", "해당 아이디와 매치되는 아이디가 없습니다");
             req.getRequestDispatcher("/error.jsp").forward(req, resp);
         }
 
