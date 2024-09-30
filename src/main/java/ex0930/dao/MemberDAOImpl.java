@@ -171,14 +171,16 @@ public class MemberDAOImpl implements MemberDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        try {
+        try
+        {
             con = DBManager.getConnection();
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, "%" + keyWord + "%");  // 앞, 뒤로 부분 일치 검색
 
             rs = pstmt.executeQuery();
 
-            while (rs.next()) {
+            while (rs.next())
+            {
                 MemberDTO member = new MemberDTO();
                 member.setId(rs.getString("id"));
                 member.setPwd(rs.getString("pwd"));
@@ -189,9 +191,13 @@ public class MemberDAOImpl implements MemberDAO {
                 member.setJoinDate(rs.getString("join_date"));
                 members.add(member);
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
-        } finally {
+        }
+        finally
+        {
             DBManager.dbClose(con, pstmt, rs);
         }
 
