@@ -28,30 +28,19 @@ public class MemberInsertServlet extends HttpServlet {
 
         MemberDAO memberDAO=new MemberDAOImpl();
 
-
-        boolean isDuplicate=false;
-        for (MemberDTO memberDTO : memberDAO.selectAll()) {
-            if(memberDTO.getId().equals(id)) {
-                isDuplicate=true;
-                break;
-            }
-        }
+        MemberDTO existingMember=memberDAO.getSelectById(id);
 
         int result=0;
-        if(!isDuplicate)
+
+        if(existingMember==null)
         {
             result=memberDAO.insert(member);
         }
         else
         {
-            resp.setContentType("text/html; charset=UTF-8");
-            resp.getWriter().println("<script>");
-            resp.getWriter().println("alert('이미 존재하는 아이디입니다.');");// 브라우저에서 빈칸으로 나옴
-            resp.getWriter().println("window.location.href = '" + req.getContextPath() + "/login.jsp';");
-            resp.getWriter().println("</script>");
-
-//            resp.sendRedirect(req.getContextPath()+"/login.jsp");
-//            위에 코드랑 같이 쓰면 에러 생김. 자바스크립트 쓸거면 리다이렉트도 자바스크립트로 하기
+            req.getSession().setAttribute("errMsg", "이미 중복된 아이디를 가진 회원이 있습니다");
+            resp.sendRedirect(req.getContextPath()+"/error.jsp");
+            return;
         }
 
         if(result>0)

@@ -153,7 +153,7 @@ public class MemberDAOImpl implements MemberDAO {
         }
 
 
-        return 0;
+        return result;
     }
 
     @Override
@@ -163,6 +163,33 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public List<MemberDTO> findBykeyFieldWord(String keyField, String keyWord) {
+        List<MemberDTO> members=new ArrayList<>();
+        String query = "SELECT id, pwd, name, age, phone, addr, join_date FROM member WHERE " + keyField + " LIKE ?";
+
+        Connection con=null;
+        PreparedStatement pstmt=null;
+        ResultSet rs=null;
+
+        try
+        {
+            con=DBManager.getConnection();
+            pstmt=con.prepareStatement(query);
+            rs=pstmt.executeQuery();
+
+            while(rs.next())
+            {
+                MemberDTO member=new MemberDTO();
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            DBManager.dbClose(con,pstmt,rs);
+        }
+
         return null;
     }
 }
