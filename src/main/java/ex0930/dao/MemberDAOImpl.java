@@ -13,7 +13,7 @@ public class MemberDAOImpl implements MemberDAO {
     @Override
     public List<MemberDTO> selectAll() {
         List<MemberDTO> list = new ArrayList<MemberDTO>();
-        String query="select id,pwd,name,phone,addr,join_date from member";
+        String query="select id,pwd,name,age,phone,addr,join_date from member";
 //        String query="select id,pwd,name,age,phone,addr,join_date from member order by join_date desc";
 
         Connection con=null;
@@ -88,11 +88,71 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public MemberDTO getSelectById(String id) {
-        return null;
+        MemberDTO member=null;
+
+        String query="select id,pwd,name,age,phone,addr,join_date from member where id=?";
+        Connection con=null;
+        PreparedStatement pstmt=null;
+        ResultSet rs=null;
+
+        try
+        {
+            con=DBManager.getConnection();
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1,id);
+            rs= pstmt.executeQuery();
+
+            if(rs.next())
+            {
+                member=new MemberDTO();
+                member.setId(rs.getString("id"));
+                member.setPwd(rs.getString("pwd"));
+                member.setName(rs.getString("name"));
+                member.setAge(rs.getString("age"));
+                member.setPhone(rs.getString("phone"));
+                member.setAddr(rs.getString("addr"));
+                member.setJoinDate(rs.getString("join_date"));
+            }
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            DBManager.dbClose(con,pstmt,rs);
+        }
+        return member;
     }
 
     @Override
     public int delete(String id) {
+        String query="delete from member where id=?";
+
+        Connection con=null;
+        PreparedStatement pstmt=null;
+        int result=0;
+
+        try
+        {
+            con=DBManager.getConnection();
+            pstmt=con.prepareStatement(query);
+            pstmt.setString(1,id);
+
+            result=pstmt.executeUpdate();
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            DBManager.dbClose(con,pstmt);
+        }
+
+
         return 0;
     }
 

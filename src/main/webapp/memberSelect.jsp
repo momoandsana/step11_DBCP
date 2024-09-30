@@ -1,7 +1,6 @@
 <%@page import="ex0930.dto.MemberDTO"%>
 <%@page import="java.util.List"%>
 <%@ page isELIgnored="false" %>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -57,18 +56,17 @@
   
   <!--데이터 가져오기-->
 <%--    전체조회--%>
-    <c:forEach var=" member" items="${memberList}" varStatus="status">
+    <c:forEach var="member" items="${memberList}" varStatus="status">
         <tr>
             <td>${status.index + 1}</td>
-<%--            <td><%= member.getId() %></td>--%>
             <td>${member.id}</td>
             <td>${member.pwd}</td>
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.addr}</td>
             <td>${member.phone}</td>
-            <td><fmt:formatDate value="${member.joinDate}" pattern="yyyy-MM-dd"/></td>
-<%--            <td>${member.joinDate}</td>  --%>
+            <td>${member.joinDate}</td>
+<%--            <td>삭제하기</td>--%>
         </tr>
     </c:forEach>
     

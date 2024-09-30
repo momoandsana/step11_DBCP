@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/selectAll")
-public class MemberSelectServlet extends HttpServlet {
+public class MemberSelectAllServlet extends HttpServlet {
 
     private MemberDAO memberDAO;
 

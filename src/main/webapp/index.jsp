@@ -12,7 +12,6 @@
  
  <script type="text/javascript">
     location.href="${pageContext.request.contextPath}/selectAll"
-
  </script>
 
 </body>
