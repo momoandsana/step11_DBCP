@@ -30,6 +30,7 @@ public class MemberDeleteServlet extends HttpServlet
 //            req.setAttribute("memberList", memberList);
 //            req.getRequestDispatcher("/memberSelect.jsp").forward(req, resp);
             resp.sendRedirect(req.getContextPath() +"/selectAll");
+            // 다시 조회해서 업데이트할 수 있도록
         }
         else
         {
