@@ -9,11 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
- 
- <script type="text/javascript">
-    location.href="${pageContext.request.contextPath}/selectAll"
 
- </script>
+<script type="text/javascript">
+  alert("${requestScope.errMsg}");
+  history.back();
+</script>
+
+
 
 </body>
 </html>
