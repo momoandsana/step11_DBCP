@@ -163,33 +163,39 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public List<MemberDTO> findBykeyFieldWord(String keyField, String keyWord) {
-        List<MemberDTO> members=new ArrayList<>();
+        List<MemberDTO> members = new ArrayList<>();
         String query = "SELECT id, pwd, name, age, phone, addr, join_date FROM member WHERE " + keyField + " LIKE ?";
+//        여기서 keyField 는 id, name, addr
 
-        Connection con=null;
-        PreparedStatement pstmt=null;
-        ResultSet rs=null;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
-        try
-        {
-            con=DBManager.getConnection();
-            pstmt=con.prepareStatement(query);
-            rs=pstmt.executeQuery();
+        try {
+            con = DBManager.getConnection();
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, "%" + keyWord + "%");  // 부분 일치 검색
 
-            while(rs.next())
-            {
-                MemberDTO member=new MemberDTO();
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                MemberDTO member = new MemberDTO();
+                member.setId(rs.getString("id"));
+                member.setPwd(rs.getString("pwd"));
+                member.setName(rs.getString("name"));
+                member.setAge(rs.getString("age"));
+                member.setPhone(rs.getString("phone"));
+                member.setAddr(rs.getString("addr"));
+                member.setJoinDate(rs.getString("join_date"));
+                members.add(member);
             }
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally
-        {
-            DBManager.dbClose(con,pstmt,rs);
+        } finally {
+            DBManager.dbClose(con, pstmt, rs);
         }
 
-        return null;
+        return members;
     }
+
 }
