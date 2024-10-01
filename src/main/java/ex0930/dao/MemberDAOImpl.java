@@ -163,7 +163,13 @@ public class MemberDAOImpl implements MemberDAO {
     public List<MemberDTO> findBykeyFieldWord(String keyField, String keyWord) {
         List<MemberDTO> members = new ArrayList<>();
         String query = "SELECT id, pwd, name, age, phone, addr, join_date FROM member WHERE " + keyField + " LIKE ?";
-//        여기서 keyField 는 id, name, addr
+        /*
+        여기서 keyField 는 id, name, addr, 이거는 statement 스타일
+        keyField 에 1=1 -- 하면 모든 정보가 다 나옴. like 부터는 주석처리
+        */
+
+
+//        sql="select * from member where ";
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -171,6 +177,19 @@ public class MemberDAOImpl implements MemberDAO {
 
         try
         {
+//            switch(keyField) {
+//                case "id":
+//                    sql += "id like ?";
+//                    break;
+//                case "name":
+//                    sql += "name like ?";
+//                    break;
+//                case "addr":
+//                    sql += "addr like ?";
+//                    break;
+//            }
+//            이렇게 하는게 더 안전
+
             con = DBManager.getConnection();
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, "%" + keyWord + "%");  // 앞, 뒤로 부분 일치 검색
