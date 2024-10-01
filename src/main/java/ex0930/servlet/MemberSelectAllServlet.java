@@ -18,7 +18,6 @@ public class MemberSelectAllServlet extends HttpServlet {
 
     private MemberDAO memberDAO;
 
-
     @Override
     public void init() throws ServletException {
         memberDAO = new MemberDAOImpl();

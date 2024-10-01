@@ -37,6 +37,8 @@ public class MemberDeleteServlet extends HttpServlet
             // 포워드
             req.setAttribute("errMsg","아이디를 삭제할 수 없습니다");
             req.getRequestDispatcher("/error.jsp").forward(req, resp);
+//            req.getRequestDispatcher("/myServlet").forward(req, resp); 서블릿으로 이동하길 원한다면
+
         }
 
     }

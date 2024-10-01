@@ -71,8 +71,6 @@ public class MemberDAOImpl implements MemberDAO {
             pstmt.setString(6,memberDTO.getAddr());
 
             result=pstmt.executeUpdate();
-
-
         }
         catch (SQLException e)
         {

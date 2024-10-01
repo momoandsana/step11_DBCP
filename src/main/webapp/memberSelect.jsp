@@ -53,7 +53,14 @@
                 <td>${member.age}</td>
                 <td>${member.addr}</td>
                 <td>${member.phone}</td>
-                <td>${member.joinDate}</td>
+<%--                <td>${member.joinDate}</td>--%>
+<%--                string 을 데이터로 변환--%>
+                <fmt:parseDate value="${member.joinDate}" pattern="yyyy-MM-dd HH:mm:ss" var="fmtDate" />
+                <td>
+                    <fmt:formatDate value="${fmtDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+                </td>
+
+
                 <td><a href="${pageContext.request.contextPath}/delete?id=${member.id}">삭제</a></td>
             </tr>
         </c:forEach>
